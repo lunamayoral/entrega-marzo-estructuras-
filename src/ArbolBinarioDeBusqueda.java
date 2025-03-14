@@ -26,6 +26,7 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
         }
         return grado;
     }
+    // Falta getgrado para el arbol entero
 
     public int getAltura() {
         return getAltura(raiz);
@@ -34,12 +35,19 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
     private int getAltura(NodoABB<K,V> nodo) {
         if (nodo == null) {
             return 0;
+        } else {
+            int alturaIzq = getAltura(nodo.getMenor());
+            int alturaDcha = getAltura(nodo.getMayor());
+            if (nodo.getMenor() == null) {
+                alturaIzq++;
+            }
+            if (nodo.getMayor() == null) {
+                alturaDcha++;
+            }
+            return Math.max(alturaIzq, alturaDcha);
         }
-        int alturaIzq = getAltura(nodo.getMenor());
-        int alturaDer = getAltura(nodo.getMayor());
-
-        return Math.max(alturaIzq, alturaDer);
     }
+
 
     public ListaSimplementeEnlazada<T> getListaDatosNivel(nivel){
 
