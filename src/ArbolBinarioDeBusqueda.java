@@ -1,11 +1,14 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
-    NodoABB<K,V> raiz;
+    NodoABB<K, V> raiz;
 
     public ArbolBinarioDeBusqueda() {
         this.raiz = null;
     }
 
-    public ArbolBinarioDeBusqueda(NodoABB<K,V> raiz) {
+    public ArbolBinarioDeBusqueda(NodoABB<K, V> raiz) {
         this.raiz = raiz;
     }
 
@@ -13,7 +16,7 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
         return getGrado(raiz);
     }
 
-    private int getGrado(NodoABB<K,V> nodo) {
+    private int getGrado(NodoABB<K, V> nodo) {
         if (nodo == null) {
             return 0;
         }
@@ -32,7 +35,7 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
         return getAltura(raiz);
     }
 
-    private int getAltura(NodoABB<K,V> nodo) {
+    private int getAltura(NodoABB<K, V> nodo) {
         if (nodo == null) {
             return 0;
         } else {
@@ -48,8 +51,72 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
         }
     }
 
+    public boolean isArbolCompleto() {
+        if (raiz == null) {
+            return true;
+        }
 
-    public ListaSimplementeEnlazada<T> getListaDatosNivel(nivel){
+        Queue<NodoABB<K, V>> cola = new LinkedList<>();
+        cola.add(raiz);
 
+        boolean espacio = false;
+
+        while (!cola.isEmpty()) {
+            NodoABB<K, V> actual = cola.poll();
+
+            if (actual.getMenor() != null) {
+                if (espacio) {
+                    return false;
+                }
+                cola.add(actual.getMenor());
+            } else {
+                espacio = true; // Detectamos un hueco
+            }
+
+            if (actual.getMayor() != null) {
+                if (espacio) {
+                    return false; // Igual que con el izquierdo
+                }
+                cola.add(actual.getMayor());
+            } else {
+                espacio = true;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean isArbolCasiCompleto() {
+        if (raiz == null) {
+            return true; // Un árbol vacío es casi completo
+        }
+
+        Queue<NodoABB<K, V>> queue = new LinkedList<>();
+        queue.add(raiz);
+
+        boolean espacio = false;
+
+        while (!queue.isEmpty()) {
+            NodoABB<K, V> actual = queue.poll();
+
+            if (actual.getMenor() != null) {
+                if (espacio) {
+                    return false; // Si hay un nodo después de un hueco, no es casi completo
+                }
+                queue.add(actual.getMenor());
+            } else {
+                espacio = true; // Detectamos un hueco
+            }
+
+            if (actual.getMayor() != null) {
+                if (espacio) {
+                    return false; // Igual que con el izquierdo
+                }
+                queue.add(actual.getMayor());
+            } else {
+                espacio = true;
+            }
+        }
+        return true;
     }
 }
