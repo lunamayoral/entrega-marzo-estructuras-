@@ -41,4 +41,18 @@ public class NodoABB<K,V> {
         return mayor;
     }
 
+    public int getGradoNodos(NodoABB<K, V> nodo) {
+        if (nodo == null) {
+            return 0;
+        }
+        int grado = 0;
+        if (nodo.getMenor() == null) {
+            grado++;
+        }
+        if (nodo.getMayor() == null) {
+            grado++;
+        }
+        return grado;
+    }
+
 }

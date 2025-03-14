@@ -20,16 +20,12 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
         if (nodo == null) {
             return 0;
         }
-        int grado = 0;
-        if (nodo.getMenor() == null) {
-            grado++;
-        }
-        if (nodo.getMayor() == null) {
-            grado++;
-        }
-        return grado;
+        int gradoActual = nodo.getGradoNodos(nodo);
+        int gradoIzq = getGrado(nodo.getMenor());
+        int gradoDcha = getGrado(nodo.getMayor());
+
+        return Math.max(gradoActual, Math.max(gradoIzq, gradoDcha));
     }
-    // Falta getgrado para el arbol entero
 
     public int getAltura() {
         return getAltura(raiz);
