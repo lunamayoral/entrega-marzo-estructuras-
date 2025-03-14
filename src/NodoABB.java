@@ -8,4 +8,37 @@ public class NodoABB<K,V> {
         this.clave = clave;
         this.valor = valor;
     }
+
+    public void setMenor(NodoABB<K,V> menor) {
+        this.menor = menor;
+    }
+
+    public void setMayor(NodoABB<K,V> mayor) {
+        this.mayor = mayor;
+    }
+
+    public K getClave() {
+        return clave;
+    }
+
+    public V getValor() {
+        return valor;
+    }
+
+    public void setValor(V valor) {
+        this.valor = valor;
+    }
+
+    public void setClave(K clave) {
+        this.clave = clave;
+    }
+
+    public NodoABB<K,V> getMenor() {
+        return menor;
+    }
+
+    public NodoABB<K,V> getMayor() {
+        return mayor;
+    }
+
 }
