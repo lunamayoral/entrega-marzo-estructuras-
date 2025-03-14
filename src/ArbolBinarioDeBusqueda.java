@@ -119,4 +119,56 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
         }
         return true;
     }
+
+    protected boolean addNodoRaiz(K clave, V valor) {
+        NodoABB<K, V> n = new NodoABB<>(clave, valor);
+        this.raiz = n;
+        return true;
+    }
+
+    protected boolean addOtrosNodos(K clave, V valor) {
+        NodoABB<K, V> candidato = buscarNodoAInsertar(clave, this.raiz);
+        if (candidato == null) {
+            return false;
+        }
+        NodoABB<K, V> n = new NodoABB<>(clave, valor);
+        if (candidato.getClave().compareTo(clave) > 0 ) {
+            candidato.setMenor(n);
+        } else {
+            candidato.setMayor(n);
+        }
+        return true;
+    }
+
+    protected NodoABB<K, V> buscarNodoAInsertar(K cbusqueda, NodoABB<K, V> nodo) {
+        if (nodo.getClave().equals(cbusqueda)) {
+            return null;
+        }
+        if (nodo.getClave().compareTo(cbusqueda) > 0) {
+            if (nodo.getMenor() != null) {
+                return buscarNodoAInsertar(cbusqueda, nodo.getMenor());
+            } else {
+                return nodo;
+            }
+        } else {
+            if (nodo.getMayor() != null) {
+                return buscarNodoAInsertar(cbusqueda, nodo.getMayor());
+            } else {
+                return nodo;
+            }
+        }
+    }
+
+    public boolean addNodo(K clave, V valor) {
+        if (this.raiz == null) {
+            return addNodoRaiz(clave, valor);
+        } else {
+            return addOtrosNodos(clave, valor);
+        }
+    }
+
+
+
 }
+
+
