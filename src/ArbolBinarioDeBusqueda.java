@@ -1,6 +1,11 @@
 public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
     NodoABB<K,V> raiz;
-
+    public ArbolBinarioDeBusqueda() {
+        this.raiz = null;
+    }
+    public ArbolBinarioDeBusqueda(NodoABB<K,V> raiz) {
+        this.raiz = raiz;
+    }
     public int getGrado() {
         return getGrado(raiz);
     }
@@ -18,5 +23,7 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
         }
         return grado;
     }
+    public ListaSimplementeEnlazada<T> getListaDatosNivel(nivel){
 
+    }
 }
