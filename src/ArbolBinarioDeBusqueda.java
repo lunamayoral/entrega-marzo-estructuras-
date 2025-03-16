@@ -1,8 +1,10 @@
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.ArrayList;
 
 public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
     NodoABB<K, V> raiz;
+    Lista[] elemento;
 
     public ArbolBinarioDeBusqueda() {
         this.raiz = null;
@@ -160,6 +162,33 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
             return addNodoRaiz(clave, valor);
         } else {
             return addOtrosNodos(clave, valor);
+        }
+    }
+
+    public java.util.ArrayList<Object> getCamino(K cbusqueda, NodoABB<K, V> nodo) {
+
+        ArrayList<Object> path = new ArrayList<>();
+        {
+            // Itera mientras no es nulo y no hemos llegado al nodo buscado
+            while (nodo != null && !nodo.getClave().equals(cbusqueda)) {
+                // Agregamos el nodo actual a la lista del camino
+                path.add(nodo);
+
+                // Indicar izquierda o derecha
+                if (nodo.getClave().compareTo(cbusqueda) > 0) {
+                    nodo = nodo.getMenor();
+                } else {
+                    nodo = nodo.getMayor();
+                }
+            }
+
+            // Añade el nodo
+            if (nodo != null) {
+                path.add(nodo);
+            }
+
+            // Devuelve la lista
+            return path;
         }
     }
 
