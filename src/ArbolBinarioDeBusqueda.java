@@ -196,7 +196,53 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
 
 
 
+    public ArrayList<NodoABB<K, V>> recorrerPreOrden(NodoABB<K, V> nodo, ArrayList<NodoABB<K, V>> lista) {
+        if (nodo == null) return lista;
+        lista.add(nodo); //  raíz
+        recorrerPreOrden(nodo.getMenor(), lista); //  subárbol izquierdo
+        recorrerPreOrden(nodo.getMayor(), lista); //subárbol derecho
+        return lista;
+    }
 
-}
+    // Recorrido inorden
+    public ArrayList<NodoABB<K, V>> recorrerInOrden(NodoABB<K, V> nodo, ArrayList<NodoABB<K, V>> lista) {
+        if (nodo == null) return lista;
+        recorrerInOrden(nodo.getMenor(), lista); // Subárbol izquierdo
+        lista.add(nodo); //  raíz
+        recorrerInOrden(nodo.getMayor(), lista); // Subárbol derecho
+        return lista;
+    }
+
+    // Recorrido postorden
+    public ArrayList<NodoABB<K, V>> recorrerPostOrden(NodoABB<K, V> nodo, ArrayList<NodoABB<K, V>> lista) {
+        if (nodo == null) return lista;
+        recorrerPostOrden(nodo.getMenor(), lista); // Subárbol izquierdo
+        recorrerPostOrden(nodo.getMayor(), lista); // Subárbol derecho
+        lista.add(nodo); // raíz
+        return lista;
+    }
+
+
+    public NodoABB<K, V> getSubarbolIzquierdo(NodoABB<K, V> nodo) {
+        return nodo != null ? nodo.getMenor() : null;
+    }
+
+    public NodoABB<K, V> getSubarbolDerecho(NodoABB<K, V> nodo) {
+        return nodo != null ? nodo.getMayor() : null;
+    }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    
 
 

@@ -3,6 +3,7 @@ public class NodoABB<K,V> {
     private V valor;
     private NodoABB<K,V> menor;
     private NodoABB<K,V> mayor;
+    private NodoABB<K,V> padre;
 
 
     public NodoABB(K clave, V valor) {
@@ -40,6 +41,9 @@ public class NodoABB<K,V> {
 
     public NodoABB<K,V> getMayor() {
         return mayor;
+    }
+    public NodoABB<K,V> getPadre() {
+        return padre;
     }
 
     public int getGradoNodos(NodoABB<K, V> nodo) {
