@@ -60,4 +60,15 @@ public class NodoABB<K,V> {
 
 
 
+
+
+
+
+public String toString(){
+        return "("+ getClave() +", " + getValor() + ")";
+
+}
+
+
+
 }

@@ -138,7 +138,7 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
         return true;
     }
 
-    protected NodoABB<K, V> buscarNodoAInsertar(K cbusqueda, NodoABB<K, V> nodo) {
+    protected NodoABB<K, V> buscarNodoAInsertar(K cbusqueda, NodoABB<K, V> nodo) {  //PreOrden
         if (nodo.getClave().equals(cbusqueda)) {
             return null;
         }
@@ -191,6 +191,9 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
             return path;
         }
     }
+
+
+
 
 
 
