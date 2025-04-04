@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
     NodoABB<K, V> raiz;
     Lista[] elemento;
+    int nivelDeseado;
 
     public ArbolBinarioDeBusqueda() {
         this.raiz = null;
@@ -46,6 +47,23 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
                 alturaDcha++;
             }
             return Math.max(alturaIzq, alturaDcha);
+        }
+    }
+
+    public ListaSimplementeEnlazada<V> getListaDatosNivel(int nivelDeseado) {
+        ListaSimplementeEnlazada<V> nodos = new ListaSimplementeEnlazada<>();
+        obtenerNodosEnNivel(raiz, nivelDeseado, 0, nodos);
+        return nodos;
+    }
+    private void obtenerNodosEnNivel(NodoABB<K, V> nodo, int nivelDeseado, int nivelActual, ListaSimplementeEnlazada<V> nodos) {
+        if (nodo == null) {
+            return;
+        }
+        if (nivelActual == nivelDeseado) {
+            nodos.add(nodo.getValor());
+        } else {
+            obtenerNodosEnNivel(nodo.getMenor(), nivelDeseado, nivelActual + 1, nodos);
+            obtenerNodosEnNivel(nodo.getMayor(), nivelDeseado, nivelActual + 1, nodos);
         }
     }
 
@@ -130,7 +148,7 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
             return false;
         }
         NodoABB<K, V> n = new NodoABB<>(clave, valor);
-        if (candidato.getClave().compareTo(clave) > 0 ) {
+        if (candidato.getClave().compareTo(clave) > 0) {
             candidato.setMenor(n);
         } else {
             candidato.setMayor(n);
