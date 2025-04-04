@@ -221,14 +221,21 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
     }
 
 
-    public NodoABB<K, V> getSubarbolIzquierdo(NodoABB<K, V> nodo) {
-        return nodo != null ? nodo.getMenor() : null;
+    public ArbolBinarioDeBusqueda<K, V> getSubarbolIzquierdo(NodoABB<K, V> nodo) {
+        ArbolBinarioDeBusqueda<K, V> subarbolIzquierdo = new ArbolBinarioDeBusqueda<>();
+        if (nodo != null && nodo.getMenor() != null) {
+            subarbolIzquierdo.raiz = nodo.getMenor(); // Asignar el nodo menor como raíz del subárbol
+        }
+        return subarbolIzquierdo;
     }
 
-    public NodoABB<K, V> getSubarbolDerecho(NodoABB<K, V> nodo) {
-        return nodo != null ? nodo.getMayor() : null;
+    public ArbolBinarioDeBusqueda<K, V> getSubarbolDerecho(NodoABB<K, V> nodo) {
+        ArbolBinarioDeBusqueda<K, V> subarbolDerecho = new ArbolBinarioDeBusqueda<>();
+        if (nodo != null && nodo.getMayor() != null) {
+            subarbolDerecho.raiz = nodo.getMayor(); // Asignar el nodo mayor como raíz del subárbol
+        }
+        return subarbolDerecho;
     }
-
 
 
 }
