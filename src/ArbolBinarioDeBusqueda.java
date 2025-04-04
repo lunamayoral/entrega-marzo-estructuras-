@@ -2,6 +2,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.ArrayList;
 
+
 public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
     NodoABB<K, V> raiz;
     Lista[] elemento;
@@ -183,58 +184,66 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
         }
     }
 
-    public java.util.ArrayList<Object> getCamino(K cbusqueda, NodoABB<K, V> nodo) {
+    public ArrayList<NodoABB<K,V>> getCamino(K cbusqueda, NodoABB<K, V> nodo) {
 
-        ArrayList<Object> path = new ArrayList<>();
-        {
-            // Itera mientras no es nulo y no hemos llegado al nodo buscado
-            while (nodo != null && !nodo.getClave().equals(cbusqueda)) {
-                // Agregamos el nodo actual a la lista del camino
-                path.add(nodo);
+        ArrayList<NodoABB<K,V>>path = new ArrayList<NodoABB<K,V>>();
+        // Itera mientras no es nulo y no hemos llegado al nodo buscado
+        while (nodo != null && !nodo.getClave().equals(cbusqueda)) {
+            // Agregamos el nodo actual a la lista del camino
+            path.add(nodo);
 
-                // Indicar izquierda o derecha
-                if (nodo.getClave().compareTo(cbusqueda) > 0) {
-                    nodo = nodo.getMenor();
-                } else {
-                    nodo = nodo.getMayor();
-                }
+            // Indicar izquierda o derecha
+            if (nodo.getClave().compareTo(cbusqueda) > 0) {
+                nodo = nodo.getMenor();
+            } else {
+                nodo = nodo.getMayor();
             }
-
-            // Añade el nodo
-            if (nodo != null) {
-                path.add(nodo);
-            }
-
-            // Devuelve la lista
-            return path;
         }
+
+        // Añade el nodo
+        if (nodo != null) {
+            path.add(nodo);
+        }
+
+        // Devuelve la lista
+        return path;
+
+
+
     }
 
 
     // Recorrido preorden
-    public ArrayList<NodoABB<K, V>> recorrerPreOrden(NodoABB<K, V> nodo, ArrayList<NodoABB<K, V>> lista) {
-        if (nodo == null) return lista;
-        lista.add(nodo); //  raíz
-        recorrerPreOrden(nodo.getMenor(), lista); //  subárbol izquierdo
-        recorrerPreOrden(nodo.getMayor(), lista); //subárbol derecho
-        return lista;
-    }
+
+        public ListaSimplementeEnlazada<V> recorrerPreOrden(NodoABB<K,V> nodo, ListaSimplementeEnlazada<V> lista) {
+            if (nodo != null) {
+                lista.add(nodo.getValor()); // Agrega el valor del nodo actual
+                recorrerPreOrden(nodo.getMenor(), lista); // Recorre el subárbol izquierdo
+                recorrerPreOrden(nodo.getMayor(), lista); // Recorre el subárbol derecho
+            }
+
+            return lista; // Retorna la lista con los valores agregados
+        }
+
 
     // Recorrido en orden central
-    public ArrayList<NodoABB<K, V>> recorrerOrdenCentral(NodoABB<K, V> nodo, ArrayList<NodoABB<K, V>> lista) {
-        if (nodo == null) return lista;
-        recorrerOrdenCentral(nodo.getMenor(), lista); // Subárbol izquierdo
-        lista.add(nodo); //  raíz
-        recorrerOrdenCentral(nodo.getMayor(), lista); // Subárbol derecho
+    public ListaSimplementeEnlazada<V>  recorrerOrdenCentral(NodoABB<K, V> nodo, ListaSimplementeEnlazada<V> lista) {
+        if (nodo != null) {
+            recorrerOrdenCentral(nodo.getMenor(), lista); // Subárbol izquierdo
+            lista.add(nodo.getValor()); //  raíz
+            recorrerOrdenCentral(nodo.getMayor(), lista); // Subárbol derecho
+        }
         return lista;
     }
 
+
     // Recorrido postorden
-    public ArrayList<NodoABB<K, V>> recorrerPostOrden(NodoABB<K, V> nodo, ArrayList<NodoABB<K, V>> lista) {
-        if (nodo == null) return lista;
-        recorrerPostOrden(nodo.getMenor(), lista); // Subárbol izquierdo
-        recorrerPostOrden(nodo.getMayor(), lista); // Subárbol derecho
-        lista.add(nodo); // raíz
+    public ListaSimplementeEnlazada<V>  recorrerPostOrden(NodoABB<K, V> nodo, ListaSimplementeEnlazada<V> lista) {
+        if (nodo != null) {
+            recorrerPostOrden(nodo.getMenor(), lista); // Subárbol izquierdo
+            recorrerPostOrden(nodo.getMayor(), lista); // Subárbol derecho
+            lista.add(nodo.getValor()); // raíz
+        }
         return lista;
     }
 

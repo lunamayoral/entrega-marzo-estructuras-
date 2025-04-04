@@ -37,6 +37,36 @@ public class pruebas {
         System.out.println("Caso 3: Árbol vacío:");
         System.out.println(tree.getCamino(50, null));
 
+
+
+        NodoABB<Integer, String> aa = new NodoABB<>(50, "R");
+        NodoABB<Integer, String> ab = new NodoABB<>(30, "L");
+        NodoABB<Integer, String> ac = new NodoABB<>(70, "R");
+        NodoABB<Integer, String>  ad = new NodoABB<>(20, "LL");
+        NodoABB<Integer, String> ae = new NodoABB<>(40, "LR");
+        NodoABB<Integer, String> af = new NodoABB<>(60, "RL");
+        NodoABB<Integer, String> ag = new NodoABB<>(80, "RR");
+
+        aa.setMenor(ab);
+        aa.setMayor(ac);
+        ab.setMenor(ad);
+        ab.setMayor(ae);
+        ac.setMenor(af);
+        ac.setMayor(ag);
+
+
+        ArbolBinarioDeBusqueda<Integer, String> arbolito = new ArbolBinarioDeBusqueda<>();
+        ListaSimplementeEnlazada todos = new ListaSimplementeEnlazada();
+        arbolito.recorrerPreOrden(aa, todos);
+        System.out.println(arbolito);
+
     }
+
+
+
+
+
+
+
 
 }
