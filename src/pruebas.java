@@ -54,17 +54,17 @@ public class pruebas {
 
 
         ArrayList<NodoABB<Integer, String>> preOrden = new ArrayList<>();
-        ArrayList<NodoABB<Integer, String>> inOrden = new ArrayList<>();
+        ArrayList<NodoABB<Integer, String>> OrdenCentral = new ArrayList<>();
         ArrayList<NodoABB<Integer, String>> postOrden = new ArrayList<>();
 
 
-        recorridos.recorrerPreOrden(nodo1, preOrden);
-        recorridos.recorrerInOrden(nodo1, inOrden);
-        recorridos.recorrerPostOrden(nodo1, postOrden);
+        recorridos.recorrerPreOrden(nodo1);
+        recorridos.recorrerOrdenCentral(nodo1);
+        recorridos.recorrerPostOrden(nodo1);
 
 
         System.out.println(preOrden);
-        System.out.println(inOrden);
+        System.out.println(OrdenCentral);
         System.out.println(postOrden);
 
     }

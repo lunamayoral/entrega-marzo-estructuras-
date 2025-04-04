@@ -196,30 +196,33 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
 
 
 
-    public ArrayList<NodoABB<K, V>> recorrerPreOrden(NodoABB<K, V> nodo, ArrayList<NodoABB<K, V>> lista) {
-        if (nodo == null) return lista;
-        lista.add(nodo); //  raíz
-        recorrerPreOrden(nodo.getMenor(), lista); //  subárbol izquierdo
-        recorrerPreOrden(nodo.getMayor(), lista); //subárbol derecho
-        return lista;
+    public void recorrerPreOrden(NodoABB<K, V> nodo) {
+        if (nodo != null) {
+            System.out.println(nodo.getValor());
+            recorrerPreOrden(nodo.getMenor());
+            recorrerPreOrden(nodo.getMayor());
+        }
+
     }
 
-    // Recorrido inorden
-    public ArrayList<NodoABB<K, V>> recorrerInOrden(NodoABB<K, V> nodo, ArrayList<NodoABB<K, V>> lista) {
-        if (nodo == null) return lista;
-        recorrerInOrden(nodo.getMenor(), lista); // Subárbol izquierdo
-        lista.add(nodo); //  raíz
-        recorrerInOrden(nodo.getMayor(), lista); // Subárbol derecho
-        return lista;
+    // Recorrido OrdenCentral
+    public void recorrerOrdenCentral(NodoABB<K, V> nodo) {
+        if (nodo != null) {
+
+            recorrerOrdenCentral(nodo.getMenor());
+            System.out.println(nodo.getValor());
+            recorrerOrdenCentral(nodo.getMayor());
+        }
     }
+
 
     // Recorrido postorden
-    public ArrayList<NodoABB<K, V>> recorrerPostOrden(NodoABB<K, V> nodo, ArrayList<NodoABB<K, V>> lista) {
-        if (nodo == null) return lista;
-        recorrerPostOrden(nodo.getMenor(), lista); // Subárbol izquierdo
-        recorrerPostOrden(nodo.getMayor(), lista); // Subárbol derecho
-        lista.add(nodo); // raíz
-        return lista;
+    public void  recorrerPostOrden(NodoABB<K, V> nodo) {
+        if (nodo != null) {
+            recorrerPostOrden(nodo.getMenor());
+            recorrerPostOrden(nodo.getMayor());
+            System.out.println(nodo.getValor());
+        }
     }
 
 
