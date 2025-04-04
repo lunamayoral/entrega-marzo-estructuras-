@@ -237,22 +237,21 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
         return subarbolDerecho;
     }
 
+    public boolean isArbolHomogeneo() {
+        if (raiz == null) {
+            return true; // Un árbol vacío es homogéneo.
+        }
+        return verificarHomogeneidad(raiz, this.getGrado());
+    }
+
+    private boolean verificarHomogeneidad(NodoABB<K, V> nodo, int grado) {
+        if (getGrado(nodo) == 0) {
+            return true;
+        }
+        if (getGrado(nodo) != grado) {
+            return false;
+        }
+        return verificarHomogeneidad(nodo.getMenor(), grado) && verificarHomogeneidad(nodo.getMayor(), grado);
+    }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
