@@ -35,17 +35,11 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
 
     private int getAltura(NodoABB<K, V> nodo) {
         if (nodo == null) {
-            return 0;
+            return -1;
         } else {
             int alturaIzq = getAltura(nodo.getMenor());
             int alturaDcha = getAltura(nodo.getMayor());
-            if (nodo.getMenor() == null) {
-                alturaIzq++;
-            }
-            if (nodo.getMayor() == null) {
-                alturaDcha++;
-            }
-            return Math.max(alturaIzq, alturaDcha);
+            return Math.max(alturaIzq, alturaDcha) + 1; // Sumamos 1 por el nodo actual
         }
     }
 

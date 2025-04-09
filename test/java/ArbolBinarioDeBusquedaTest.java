@@ -22,6 +22,24 @@ class ArbolBinarioDeBusquedaTest {
         arbol.addNodo(5, "Izquierda");
         arbol.addNodo(15, "Derecha");
         assertEquals(1, arbol.getAltura()); // Altura del árbol
+
+        ArbolBinarioDeBusqueda<Integer, String> arbol2 = new ArbolBinarioDeBusqueda<>();
+        arbol2.addNodo(10, "Raíz");
+        arbol2.addNodo(5, "Izquierda");
+        arbol2.addNodo(15, "Derecha");
+        arbol2.addNodo(3, "Izquierda Izquierda");
+        arbol2.addNodo(7, "Izquierda Derecha");
+        arbol2.addNodo(12, "Derecha Izquierda");
+        arbol2.addNodo(18, "Derecha Derecha");
+        arbol2.addNodo(1, "Izquierda Izquierda Izquierda");
+        arbol2.addNodo(4, "Izquierda Izquierda Derecha");
+        arbol2.addNodo(6, "Izquierda Derecha Izquierda");
+        arbol2.addNodo(8, "Izquierda Derecha Derecha");
+        arbol2.addNodo(11, "Derecha Izquierda Izquierda");
+        arbol2.addNodo(14, "Derecha Izquierda Derecha");
+        arbol2.addNodo(17, "Derecha Derecha Izquierda");
+        arbol2.addNodo(20, "Derecha Derecha Derecha");
+        assertEquals(3, arbol2.getAltura());
     }
 
     @Test
