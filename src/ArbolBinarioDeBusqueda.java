@@ -5,8 +5,6 @@ import java.util.ArrayList;
 
 public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
     NodoABB<K, V> raiz;
-    Lista[] elemento;
-    int nivelDeseado;
 
     public ArbolBinarioDeBusqueda() {
         this.raiz = null;
@@ -56,6 +54,7 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
         obtenerNodosEnNivel(raiz, nivelDeseado, 0, nodos);
         return nodos;
     }
+
     private void obtenerNodosEnNivel(NodoABB<K, V> nodo, int nivelDeseado, int nivelActual, ListaSimplementeEnlazada<V> nodos) {
         if (nodo == null) {
             return;
@@ -72,7 +71,6 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
         if (raiz == null) {
             return true;
         }
-
         Queue<NodoABB<K, V>> cola = new LinkedList<>();
         cola.add(raiz);
 
@@ -145,9 +143,6 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
 
     protected boolean addOtrosNodos(K clave, V valor) {
         NodoABB<K, V> candidato = buscarNodoAInsertar(clave, this.raiz);
-        if (candidato == null) {
-            return false;
-        }
         NodoABB<K, V> n = new NodoABB<>(clave, valor);
         if (candidato.getClave().compareTo(clave) > 0) {
             candidato.setMenor(n);
@@ -157,7 +152,7 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
         return true;
     }
 
-    protected NodoABB<K, V> buscarNodoAInsertar(K cbusqueda, NodoABB<K, V> nodo) {  //PreOrden
+    protected NodoABB<K, V> buscarNodoAInsertar(K cbusqueda, NodoABB<K, V> nodo) {
         if (nodo.getClave().equals(cbusqueda)) {
             return null;
         }
@@ -184,51 +179,37 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
         }
     }
 
-    public ArrayList<NodoABB<K,V>> getCamino(K cbusqueda, NodoABB<K, V> nodo) {
-
-        ArrayList<NodoABB<K,V>>path = new ArrayList<>();
-        // Itera mientras no es nulo y no hemos llegado al nodo buscado
+    public ArrayList<NodoABB<K, V>> getCamino(K cbusqueda, NodoABB<K, V> nodo) {
+        ArrayList<NodoABB<K, V>> path = new ArrayList<NodoABB<K, V>>();
         while (nodo != null && !nodo.getClave().equals(cbusqueda)) {
-            // Agregamos el nodo actual a la lista del camino
             path.add(nodo);
-
-            // Indicar izquierda o derecha
             if (nodo.getClave().compareTo(cbusqueda) > 0) {
                 nodo = nodo.getMenor();
             } else {
                 nodo = nodo.getMayor();
             }
         }
-
-        // Añade el nodo
         if (nodo != null) {
             path.add(nodo);
         }
-
-        // Devuelve la lista
         return path;
+    }
 
+    // Recorrido preorden
+    public ArrayList<V> recorrerPreOrden(NodoABB<K, V> nodo, ArrayList<V> lista) {
 
+        if (nodo != null) {
+            lista.add(nodo.getValor()); // Agrega el valor del nodo actual
+            recorrerPreOrden(nodo.getMenor(), lista); // Recorre el subárbol izquierdo
+            recorrerPreOrden(nodo.getMayor(), lista); // Recorre el subárbol derecho
+        }
 
+        return lista; // Retorna la lista con los valores agregados
     }
 
 
-    // Recorrido preorden
-
-        public ArrayList<V> recorrerPreOrden(NodoABB<K,V> nodo , ArrayList<V> lista) {
-
-            if (nodo != null) {
-                lista.add(nodo.getValor()); // Agrega el valor del nodo actual
-                recorrerPreOrden(nodo.getMenor(), lista); // Recorre el subárbol izquierdo
-                recorrerPreOrden(nodo.getMayor(), lista); // Recorre el subárbol derecho
-            }
-
-            return lista; // Retorna la lista con los valores agregados
-        }
-
-
     // Recorrido en orden central
-    public  ArrayList<V> recorrerOrdenCentral(NodoABB<K, V> nodo, ArrayList<V>  lista) {
+    public ArrayList<V> recorrerOrdenCentral(NodoABB<K, V> nodo, ArrayList<V> lista) {
         if (nodo != null) {
             recorrerOrdenCentral(nodo.getMenor(), lista); // Subárbol izquierdo
             lista.add(nodo.getValor()); //  raíz
@@ -237,9 +218,8 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
         return lista;
     }
 
-
     // Recorrido postorden
-    public ArrayList<V>   recorrerPostOrden(NodoABB<K, V> nodo, ArrayList<V>  lista) {
+    public ArrayList<V> recorrerPostOrden(NodoABB<K, V> nodo, ArrayList<V> lista) {
         if (nodo != null) {
             recorrerPostOrden(nodo.getMenor(), lista); // Subárbol izquierdo
             recorrerPostOrden(nodo.getMayor(), lista); // Subárbol derecho
@@ -247,7 +227,6 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
         }
         return lista;
     }
-
 
     public ArbolBinarioDeBusqueda<K, V> getSubarbolIzquierdo(NodoABB<K, V> nodo) {
         ArbolBinarioDeBusqueda<K, V> subarbolIzquierdo = new ArbolBinarioDeBusqueda<>();
@@ -272,7 +251,7 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
         return verificarHomogeneidad(raiz, this.getGrado());
     }
 
-    private boolean verificarHomogeneidad(NodoABB<K, V> nodo, int grado) {
+    protected boolean verificarHomogeneidad(NodoABB<K, V> nodo, int grado) {
         if (getGrado(nodo) == 0) {
             return true;
         }
