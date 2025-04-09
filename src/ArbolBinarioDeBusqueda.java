@@ -227,7 +227,7 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
 
 
     // Recorrido en orden central
-    public ListaSimplementeEnlazada<V>  recorrerOrdenCentral(NodoABB<K, V> nodo, ListaSimplementeEnlazada<V> lista) {
+    public ListaSimplementeEnlazada<V> recorrerOrdenCentral(NodoABB<K, V> nodo, ListaSimplementeEnlazada<V> lista) {
         if (nodo != null) {
             recorrerOrdenCentral(nodo.getMenor(), lista); // Subárbol izquierdo
             lista.add(nodo.getValor()); //  raíz
@@ -238,7 +238,7 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
 
 
     // Recorrido postorden
-    public ListaSimplementeEnlazada<V>  recorrerPostOrden(NodoABB<K, V> nodo, ListaSimplementeEnlazada<V> lista) {
+    public ListaSimplementeEnlazada<V> recorrerPostOrden(NodoABB<K, V> nodo, ListaSimplementeEnlazada<V> lista) {
         if (nodo != null) {
             recorrerPostOrden(nodo.getMenor(), lista); // Subárbol izquierdo
             recorrerPostOrden(nodo.getMayor(), lista); // Subárbol derecho
