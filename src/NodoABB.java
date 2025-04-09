@@ -55,6 +55,10 @@ public class NodoABB<K,V> {
         return grado;
     }
 
+    public String toString() {
+        return "Nodo[" + getValor() + "]";
+    }
+
 
 
 }

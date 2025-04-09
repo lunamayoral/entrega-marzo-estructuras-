@@ -186,7 +186,7 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
 
     public ArrayList<NodoABB<K,V>> getCamino(K cbusqueda, NodoABB<K, V> nodo) {
 
-        ArrayList<NodoABB<K,V>>path = new ArrayList<NodoABB<K,V>>();
+        ArrayList<NodoABB<K,V>>path = new ArrayList<>();
         // Itera mientras no es nulo y no hemos llegado al nodo buscado
         while (nodo != null && !nodo.getClave().equals(cbusqueda)) {
             // Agregamos el nodo actual a la lista del camino
