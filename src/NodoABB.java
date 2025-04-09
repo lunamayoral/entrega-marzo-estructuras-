@@ -46,10 +46,10 @@ public class NodoABB<K,V> {
             return 0;
         }
         int grado = 0;
-        if (nodo.getMenor() == null) {
+        if (nodo.getMenor() != null) {
             grado++;
         }
-        if (nodo.getMayor() == null) {
+        if (nodo.getMayor() != null) {
             grado++;
         }
         return grado;

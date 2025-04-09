@@ -65,11 +65,11 @@ class NodoABBTest {
     @Test
     void getGradoNodos() {
         NodoABB<Integer, Integer> nodo = new NodoABB<>(5, 3);
-        assertEquals(2, nodo.getGradoNodos(nodo)); // Grado 2 porque no tiene hijos
+        assertEquals(0, nodo.getGradoNodos(nodo)); // Grado 0 porque no tiene hijos
         nodo.setMenor(new NodoABB<>(3, 2));
         assertEquals(1, nodo.getGradoNodos(nodo)); // Grado 1 porque tiene un hijo
         nodo.setMayor(new NodoABB<>(7, 4));
-        assertEquals(0, nodo.getGradoNodos(nodo)); // Grado 0 porque tiene ambos hijos
+        assertEquals(2, nodo.getGradoNodos(nodo)); // Grado 2 porque tiene ambos hijos
         NodoABB<Integer, Integer> nodo3 = null;
         assertEquals(0, nodo.getGradoNodos(nodo3));
     }

@@ -322,6 +322,13 @@ class ArbolBinarioDeBusquedaTest {
         assertFalse(arbol.isArbolCompleto()); // Este árbol no es completo
     }
 
-
+    @Test
+    public void testArbolNoCompleto2() {
+        ArbolBinarioDeBusqueda<Integer, String> arbol = new ArbolBinarioDeBusqueda<>();
+        arbol.addNodo(10, "Raíz");
+        arbol.addNodo(5, "Izquierda");
+        // Aquí el árbol tiene un solo hijo izquierdo, por lo que no es completo
+        assertFalse(arbol.isArbolCompleto());
+    }
 
 }
