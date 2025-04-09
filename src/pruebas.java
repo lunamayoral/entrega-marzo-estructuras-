@@ -38,11 +38,10 @@ public class pruebas {
         System.out.println(tree.getCamino(50, null));
 
 
-
-        NodoABB<Integer, String> aa = new NodoABB<>(50, "R");
+        NodoABB<Integer, String> aa = new NodoABB<>(50, "Root");
         NodoABB<Integer, String> ab = new NodoABB<>(30, "L");
         NodoABB<Integer, String> ac = new NodoABB<>(70, "R");
-        NodoABB<Integer, String>  ad = new NodoABB<>(20, "LL");
+        NodoABB<Integer, String> ad = new NodoABB<>(20, "LL");
         NodoABB<Integer, String> ae = new NodoABB<>(40, "LR");
         NodoABB<Integer, String> af = new NodoABB<>(60, "RL");
         NodoABB<Integer, String> ag = new NodoABB<>(80, "RR");
@@ -55,18 +54,33 @@ public class pruebas {
         ac.setMayor(ag);
 
 
-        ArbolBinarioDeBusqueda<Integer, String> arbolito = new ArbolBinarioDeBusqueda<>();
-        ListaSimplementeEnlazada todos = new ListaSimplementeEnlazada();
-        arbolito.recorrerPreOrden(aa, todos);
-        System.out.println(arbolito);
+        ArrayList<String> apre = new ArrayList<>();
+        apre = tree.recorrerPreOrden(aa, apre);
+
+        System.out.println(apre);
+
+
+        ArrayList<String> acen = new ArrayList<>();
+        acen = tree.recorrerOrdenCentral(aa, acen);
+
+        System.out.println(acen);
+
+        ArrayList<String> apost = new ArrayList<>();
+        apost = tree.recorrerPostOrden(aa, apost);
+
+        System.out.println(apost);
+
 
     }
 
 
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
