@@ -73,4 +73,10 @@ class NodoABBTest {
         NodoABB<Integer, Integer> nodo3 = null;
         assertEquals(0, nodo.getGradoNodos(nodo3));
     }
+
+    @Test
+    void StringtoString() {
+        NodoABB<Integer, Integer> nodo = new NodoABB<>(5, 3);
+        assertEquals("Nodo[3]", nodo.toString());
+    }
 }

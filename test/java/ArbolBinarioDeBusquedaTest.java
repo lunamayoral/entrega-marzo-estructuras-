@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestTemplate;
 
 import java.util.ArrayList;
 
@@ -268,9 +269,59 @@ class ArbolBinarioDeBusquedaTest {
         assertEquals(15, nodo.getClave()); // El padre del nodo 18 debería ser 15
     }
 
+
     @Test
     void testVerificarHomogeneidad() {
-        ArbolBinarioDeBusqueda<Integer, String> arbol = new ArbolBinarioDeBusqueda<>();
+        ArbolBinarioDeBusqueda<Integer, String> arbolHomogeneo = new ArbolBinarioDeBusqueda<>();
+        arbolHomogeneo.addNodo(10, "Raíz");
+        arbolHomogeneo.addNodo(5, "Izquierda");
+        arbolHomogeneo.addNodo(15, "Derecha");
+        assertTrue(arbolHomogeneo.isArbolHomogeneo()); // Debe ser homogéneo
 
+        ArbolBinarioDeBusqueda<Integer, String> arbolNoHomogeneo = new ArbolBinarioDeBusqueda<>();
+        arbolNoHomogeneo.addNodo(10, "Raíz");
+        arbolNoHomogeneo.addNodo(5, "Izquierda");
+        arbolNoHomogeneo.addNodo(15, "Derecha");
+        arbolNoHomogeneo.addNodo(3, "Izquierda de 5");
+        assertFalse(arbolNoHomogeneo.isArbolHomogeneo()); // No debe ser homogéneo
     }
+
+    @Test
+    void testVerificarNodoNulo() {
+        ArbolBinarioDeBusqueda<Integer, Integer> arbol = new ArbolBinarioDeBusqueda<>();
+        NodoABB<Integer,Integer> nodonulo = null;
+        assertEquals(0, arbol.getGradoNodos(nodonulo));
+    }
+
+
+    @Test
+    void testGetCaminoClaveNoExistente() {
+        ArbolBinarioDeBusqueda<Integer, String> arbol = new ArbolBinarioDeBusqueda<>();
+        arbol.addNodo(10, "Raíz");
+        arbol.addNodo(5, "Izquierda");
+        arbol.addNodo(15, "Derecha");
+
+        ArrayList<NodoABB<Integer, String>> camino = arbol.getCamino(7, arbol.getRaiz());
+        assertEquals(2, camino.size());
+        assertEquals(10, camino.get(0).getClave().intValue());
+        assertEquals(5, camino.get(1).getClave().intValue());
+    }
+
+    @Test
+    void testGetCaminoArbolVacio() {
+        ArbolBinarioDeBusqueda<Integer, String> arbol = new ArbolBinarioDeBusqueda<>();
+        ArrayList<NodoABB<Integer, String>> camino = arbol.getCamino(5, null);
+        assertTrue(camino.isEmpty());
+    }
+
+    @Test
+    void testArbolNoCompleto() {
+        ArbolBinarioDeBusqueda<Integer, String> arbol = new ArbolBinarioDeBusqueda<>();
+        arbol.addNodo(10, "Raíz");
+        arbol.addNodo(15, "Derecha");
+        assertFalse(arbol.isArbolCompleto()); // Este árbol no es completo
+    }
+
+
+
 }

@@ -14,6 +14,10 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
         this.raiz = raiz;
     }
 
+    public NodoABB<K, V> getRaiz() {
+        return raiz;
+    }
+
     public int getGrado() {
         return getGrado(raiz);
     }
@@ -91,7 +95,6 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
                 espacio = true;
             }
         }
-
         return true;
     }
 
@@ -174,7 +177,10 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
     }
 
     public ArrayList<NodoABB<K, V>> getCamino(K cbusqueda, NodoABB<K, V> nodo) {
-        ArrayList<NodoABB<K, V>> path = new ArrayList<NodoABB<K, V>>();
+        ArrayList<NodoABB<K, V>> path = new ArrayList<>();
+        if (nodo == null) {
+            return path;
+        }
         while (nodo != null && !nodo.getClave().equals(cbusqueda)) {
             path.add(nodo);
             if (nodo.getClave().compareTo(cbusqueda) > 0) {
@@ -246,13 +252,27 @@ public class ArbolBinarioDeBusqueda<K extends Comparable<K>,V> {
     }
 
     protected boolean verificarHomogeneidad(NodoABB<K, V> nodo, int grado) {
-        if (getGrado(nodo) == 0) {
+        if (getGradoNodos(nodo) == 0) {
             return true;
         }
-        if (getGrado(nodo) != grado) {
+        if (getGradoNodos(nodo) != grado) {
             return false;
         }
         return verificarHomogeneidad(nodo.getMenor(), grado) && verificarHomogeneidad(nodo.getMayor(), grado);
+    }
+
+    public int getGradoNodos(NodoABB<K, V> nodo) {
+        if (nodo == null) {
+            return 0; // Un nodo nulo no tiene grado
+        }
+        int grado = 0;
+        if (nodo.getMenor() != null) {
+            grado++; // Incrementa el grado si hay un hijo izquierdo
+        }
+        if (nodo.getMayor() != null) {
+            grado++; // Incrementa el grado si hay un hijo derecho
+        }
+        return grado; // Devuelve el grado total del nodo
     }
 
 }
