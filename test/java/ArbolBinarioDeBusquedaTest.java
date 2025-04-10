@@ -56,20 +56,34 @@ class ArbolBinarioDeBusquedaTest {
     @Test
     void isArbolCompleto() {
         ArbolBinarioDeBusqueda<Integer, String> arbol = new ArbolBinarioDeBusqueda<>();
+        assertTrue(arbol.isArbolCompleto()); // Completo por defecto
         arbol.addNodo(10, "Raíz");
-        arbol.addNodo(5, "Izquierda");
         arbol.addNodo(15, "Derecha");
+        assertFalse(arbol.isArbolCompleto()); // No completo
+        arbol.addNodo(5, "Izquierda");
         assertTrue(arbol.isArbolCompleto()); // El árbol es completo
-        ArbolBinarioDeBusqueda<Integer, String> arbol2 = new ArbolBinarioDeBusqueda<>();
-        assertTrue(arbol2.isArbolCompleto());
+        arbol.addNodo(0, "II");
+        arbol.addNodo(13, "DI");
+        assertFalse(arbol.isArbolCompleto()); // No completo
     }
 
     @Test
     void isArbolCasiCompleto() {
         ArbolBinarioDeBusqueda<Integer, String> arbol = new ArbolBinarioDeBusqueda<>();
+        assertTrue(arbol.isArbolCasiCompleto()); // Un árbol vacío es casi completo
         arbol.addNodo(10, "Raíz");
         arbol.addNodo(5, "Izquierda");
-        assertTrue(arbol.isArbolCasiCompleto());
+        assertTrue(arbol.isArbolCasiCompleto()); // Casi completo
+        arbol.addNodo(15, "Derecha");
+        assertTrue(arbol.isArbolCasiCompleto()); // Un árbol completo es casi completo
+        arbol.addNodo(0, "Izquierda de 5");
+        arbol.addNodo(2, "Derecha de 0"); // Agregar un nodo que hace que no sea casi completo
+        assertFalse(arbol.isArbolCasiCompleto()); // Ahora no es casi completo
+        arbol.addNodo(-5, "Izquierda de 0");
+        arbol.addNodo(7, "Derecha de 5");
+        arbol.addNodo(12, "Izquierda de 15");
+        arbol.addNodo(-10, "Izquierda de -5");
+        assertFalse(arbol.isArbolCasiCompleto()); // No casi completo
     }
 
     @Test
@@ -215,49 +229,6 @@ class ArbolBinarioDeBusquedaTest {
     }
 
     @Test
-    void testIsArbolCasiCompletoVacio() {
-        ArbolBinarioDeBusqueda<Integer, String> arbol = new ArbolBinarioDeBusqueda<>();
-        assertTrue(arbol.isArbolCasiCompleto()); // Un árbol vacío es casi completo
-    }
-
-    @Test
-    void testIsArbolCasiCompletoUnSoloNodo() {
-        ArbolBinarioDeBusqueda<Integer, String> arbol = new ArbolBinarioDeBusqueda<>();
-        arbol.addNodo(10, "Raíz");
-        assertTrue(arbol.isArbolCasiCompleto()); // Un árbol con un solo nodo es casi completo
-    }
-
-    @Test
-    void testIsArbolCasiCompletoCompleto() {
-        ArbolBinarioDeBusqueda<Integer, String> arbol = new ArbolBinarioDeBusqueda<>();
-        arbol.addNodo(10, "Raíz");
-        arbol.addNodo(5, "Izquierda");
-        arbol.addNodo(15, "Derecha");
-        assertTrue(arbol.isArbolCasiCompleto()); // Un árbol completo es casi completo
-    }
-
-    @Test
-    void testIsArbolCasiCompletoCasiCompleto() {
-        ArbolBinarioDeBusqueda<Integer, String> arbol = new ArbolBinarioDeBusqueda<>();
-        arbol.addNodo(10, "Raíz");
-        arbol.addNodo(5, "Izquierda");
-        arbol.addNodo(15, "Derecha");
-        arbol.addNodo(3, "Izquierda de 5");
-        assertTrue(arbol.isArbolCasiCompleto()); // Este árbol es casi completo
-    }
-
-    @Test
-    void testIsArbolCasiCompletoNoCasiCompleto() {
-        ArbolBinarioDeBusqueda<Integer, String> arbol = new ArbolBinarioDeBusqueda<>();
-        arbol.addNodo(10, "Raíz");
-        arbol.addNodo(5, "Izquierda");
-        arbol.addNodo(15, "Derecha");
-        arbol.addNodo(3, "Izquierda de 5");
-        arbol.addNodo(4, "Derecha de 3"); // Agregar un nodo que hace que no sea casi completo
-        assertFalse(arbol.isArbolCasiCompleto()); // Ahora no es casi completo
-    }
-
-    @Test
     void testBuscarNodoAInsertarEnSubarbolDerechoNoExiste() {
         ArbolBinarioDeBusqueda<Integer, String> arbol = new ArbolBinarioDeBusqueda<>();
         arbol.addNodo(10, "Raíz");
@@ -268,7 +239,6 @@ class ArbolBinarioDeBusquedaTest {
         assertNotNull(nodo); // Debería encontrar el nodo padre
         assertEquals(15, nodo.getClave()); // El padre del nodo 18 debería ser 15
     }
-
 
     @Test
     void testVerificarHomogeneidad() {
@@ -313,22 +283,4 @@ class ArbolBinarioDeBusquedaTest {
         ArrayList<NodoABB<Integer, String>> camino = arbol.getCamino(5, null);
         assertTrue(camino.isEmpty());
     }
-
-    @Test
-    void testArbolNoCompleto() {
-        ArbolBinarioDeBusqueda<Integer, String> arbol = new ArbolBinarioDeBusqueda<>();
-        arbol.addNodo(10, "Raíz");
-        arbol.addNodo(15, "Derecha");
-        assertFalse(arbol.isArbolCompleto()); // Este árbol no es completo
-    }
-
-    @Test
-    public void testArbolNoCompleto2() {
-        ArbolBinarioDeBusqueda<Integer, String> arbol = new ArbolBinarioDeBusqueda<>();
-        arbol.addNodo(10, "Raíz");
-        arbol.addNodo(5, "Izquierda");
-        // Aquí el árbol tiene un solo hijo izquierdo, por lo que no es completo
-        assertFalse(arbol.isArbolCompleto());
-    }
-
 }
