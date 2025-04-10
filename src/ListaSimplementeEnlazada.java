@@ -85,5 +85,6 @@ public class ListaSimplementeEnlazada<T> implements Lista<T> {
         return actual;
     }
 
+
 }
 
