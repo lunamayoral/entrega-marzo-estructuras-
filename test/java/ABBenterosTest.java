@@ -111,15 +111,24 @@ class ABBenterosTest {
     @Test
     void getSubarbolIzquierdo() {
         ABBenteros arbol = new ABBenteros();
+        ABBenteros arbolvacio=new ABBenteros();
         arbol.addNodo(10, 10);
         arbol.addNodo(5, 5);
         ABBenteros subarbolIzquierdo = arbol.getSubarbolIzquierdo(arbol.raiz);
         assertNotNull(subarbolIzquierdo);
         assertEquals(5, subarbolIzquierdo.raiz.getClave());
+        ABBenteros subarbolIzquierdoNulo = arbol.getSubarbolIzquierdo(null);
+        NodoABB<Integer, Integer> nodo=new NodoABB<>(2,2);
+        ABBenteros subarbolIzquierdoHoja=arbolvacio.getSubarbolIzquierdo(nodo);
+        assertNotNull(subarbolIzquierdoHoja);
+        assertNotNull(subarbolIzquierdoNulo); // Asegurarse de que no sea nulo
+        assertNull(subarbolIzquierdoNulo.raiz); // La raíz debe ser nula
     }
 
     @Test
     void getSubarbolDerecho() {
+        ABBenteros arbolvacio=new ABBenteros();
+        arbolvacio.addNodo(2,2);
         ABBenteros arbol = new ABBenteros();
         arbol.addNodo(10,10 );
         arbol.addNodo(15,15 );
@@ -127,5 +136,11 @@ class ABBenterosTest {
       ABBenteros subarbolDerecho = arbol.getSubarbolDerecho(arbol.raiz);
         assertNotNull(subarbolDerecho);
         assertEquals(15, subarbolDerecho.raiz.getClave());
+        ABBenteros subarbolDerechoNulo = arbol.getSubarbolDerecho(null);
+        NodoABB<Integer, Integer> nodo=new NodoABB<>(2,2);
+        ABBenteros subarbolDerechoHoja=arbolvacio.getSubarbolDerecho(nodo);
+        assertNotNull(subarbolDerechoHoja);
+        assertNotNull(subarbolDerechoNulo); // Asegurarse de que no sea nulo
+        assertNull(subarbolDerechoNulo.raiz); // La raíz debe ser nula
     }
 }
